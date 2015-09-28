@@ -1,0 +1,22 @@
+{
+  "name": "arduino-jenkins-build-indicator",
+  "version": "0.0.1",
+  "description": "\"Indicates jenkins build state via LED\"",
+  "main": "index.js",
+  "dependencies": {
+    "johnny-five": "^0.8.92",
+    "request": "^2.64.0",
+    "usb-detection": "^1.2.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "jenkins",
+    "arduino",
+    "led"
+  ],
+  "author": "Phillip Green II <phillip.green@crowncastle.com>",
+  "license": "ISC"
+}
