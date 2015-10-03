@@ -24,13 +24,16 @@ function update(status) {
 
     if(status.pending) {
       rgb.color(yellow);
+      rgb.pulse(3000);
     } else if(status.success) {
+      rgb.stop().intensity(25).on();
       rgb.color(green);
       if(previousState !== BUILD_STATE_SUCCESS) {
         previousState = BUILD_STATE_SUCCESS;
         piezo.play({song: " - - C4 C4 - - C4 - C4 - G4 G4 G4 G4 ", beats: 1 / 8,tempo: 100});
       }
     } else {
+      rgb.stop().intensity(25).on();
       rgb.color(red);
       if(previousState !== BUILD_STATE_FAILURE) {
         previousState = BUILD_STATE_FAILURE;
@@ -43,7 +46,7 @@ function update(status) {
 board.on('ready', function(){
   piezo = new five.Piezo(9);
 
-  rgb = new five.Led.RGB({
+  rgb = new require('./pulseable-rgb')({
     pins: {
       red: 3,
       green: 5,
