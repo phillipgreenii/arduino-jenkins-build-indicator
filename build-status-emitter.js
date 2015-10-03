@@ -2,6 +2,7 @@
 var util = require('util');
 var EventEmitter = require('events');
 var request = require('request');
+var _ = require('lodash');
 
 function checkStatus(jobUrl, callback) {
   request.get({url: jobUrl + '/lastBuild/api/json', json:true}, function(err, response, body){
@@ -32,6 +33,7 @@ function BuildStatusEmitter(jobUrl, interval) {
   this.interval = interval  || 5000;
 
   var self = this;
+  var previousStatus;
 
   this.intervalId = setInterval(function(){
     checkStatus(self.jobUrl, function(err, status){
@@ -39,7 +41,10 @@ function BuildStatusEmitter(jobUrl, interval) {
         self.emit('error', err);
         return;
       }
-      self.emit('status', status);
+      if(!_.isEqual(previousStatus, status)) {
+        previousStatus = status;
+        self.emit('status', status);
+      }
     });
   }, this.interval);
 }

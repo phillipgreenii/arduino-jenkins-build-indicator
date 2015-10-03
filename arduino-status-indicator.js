@@ -18,6 +18,12 @@ function startArduinoCommunication() {
   arduinoCommunicationChannel.once('exit', function(){
     arduinoCommunicationChannel = null;
   });
+  //this is emitted as soon as the child is up and running to initialize the arduino
+  arduinoCommunicationChannel.once('message', function(){
+    if(lastStatus) {
+      displayStatus(lastStatus);
+    }
+  });
 }
 
 function stopArduinoCommunication() {
@@ -26,13 +32,17 @@ function stopArduinoCommunication() {
   }
 }
 
+var lastStatus = null;
+
 function handleError(error) {
+  lastStatus = null;
   if(arduinoCommunicationChannel) {
-    arduinoCommunicationChannel.send();
+    arduinoCommunicationChannel.send();//FIXME undefined can't be sent
   }
 }
 
 function displayStatus(status) {
+  lastStatus = status;
   if(arduinoCommunicationChannel) {
     arduinoCommunicationChannel.send(status);
   }

@@ -7,7 +7,7 @@ process.on('message', update);
 
 var black = "000000";
 var red = "FF0000";
-var yellow = "FF6600";
+var yellow = "FFCC00";
 var green = "00FF00";
 
 var rgb;
@@ -47,6 +47,7 @@ board.on('ready', function(){
   rgb.color(black);
   rgb.intensity(25);
 
+  process.send('initialize');
 });
 
 module.exports = update;
