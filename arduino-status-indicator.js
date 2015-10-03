@@ -37,7 +37,7 @@ var lastStatus = null;
 function handleError(error) {
   lastStatus = null;
   if(arduinoCommunicationChannel) {
-    arduinoCommunicationChannel.send();//FIXME undefined can't be sent
+    arduinoCommunicationChannel.send(null);
   }
 }
 
