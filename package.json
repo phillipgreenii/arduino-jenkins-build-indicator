@@ -3,6 +3,10 @@
   "version": "0.0.1",
   "description": "\"Indicates jenkins build state via LED\"",
   "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:phillipgreenii/arduino-jenkins-build-indicator.git"
+  },
   "dependencies": {
     "johnny-five": "^0.8.92",
     "lodash": "^3.10.1",
